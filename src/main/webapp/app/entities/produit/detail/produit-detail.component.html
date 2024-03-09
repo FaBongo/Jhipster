@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (produit) {
+      <div>
+        <h2 data-cy="produitDetailsHeading"><span jhiTranslate="jhipsterMicroservicesApp.produit.detail.title">Produit</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ produit.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterMicroservicesApp.produit.nom">Nom</span></dt>
+          <dd>
+            <span>{{ produit.nom }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterMicroservicesApp.produit.prix">Prix</span></dt>
+          <dd>
+            <span>{{ produit.prix }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterMicroservicesApp.produit.description">Description</span></dt>
+          <dd>
+            <span>{{ produit.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="jhipsterMicroservicesApp.produit.categorie">Categorie</span></dt>
+          <dd>
+            @if (produit.categorie) {
+              <div>
+                <a [routerLink]="['/categorie', produit.categorie.id, 'view']">{{ produit.categorie.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Retour</span>
+        </button>
+
+        <button type="button" [routerLink]="['/produit', produit.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editer</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

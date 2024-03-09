@@ -1,0 +1,22 @@
+// Define entities
+entity Categorie {
+    nom String required,
+    description String,
+    depth Integer,
+    nbreProduit Long
+}
+
+entity Produit {
+    nom String required,
+    prix Double required,
+    description String
+}
+
+// Define relationships
+relationship ManyToOne {
+    Categorie{parent} to Categorie,
+    Produit{categorie} to Categorie
+}
+
+// Specify service for Categorie
+service Categorie with serviceClass

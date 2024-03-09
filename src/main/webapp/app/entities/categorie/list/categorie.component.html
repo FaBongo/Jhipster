@@ -1,0 +1,123 @@
+<div>
+  <h2 id="page-heading" data-cy="CategorieHeading">
+    <span jhiTranslate="jhipsterMicroservicesApp.categorie.home.title">Categories</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterMicroservicesApp.categorie.home.refreshListLabel">Actualiser la liste</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-categorie"
+        [routerLink]="['/categorie/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterMicroservicesApp.categorie.home.createLabel">Créer un nouveau Categorie</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  @if (categories?.length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="jhipsterMicroservicesApp.categorie.home.notFound">Aucun Categorie trouvé</span>
+    </div>
+  }
+
+  @if (categories && categories.length > 0) {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nom">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterMicroservicesApp.categorie.nom">Nom</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="description">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterMicroservicesApp.categorie.description">Description</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="depth">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterMicroservicesApp.categorie.depth">Depth</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="nbreProduit">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterMicroservicesApp.categorie.nbreProduit">Nbre Produit</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="parent.id">
+              <div class="d-flex">
+                <span jhiTranslate="jhipsterMicroservicesApp.categorie.parent">Parent</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (categorie of categories; track trackId) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/categorie', categorie.id, 'view']">{{ categorie.id }}</a>
+              </td>
+              <td>{{ categorie.nom }}</td>
+              <td>{{ categorie.description }}</td>
+              <td>{{ categorie.depth }}</td>
+              <td>{{ categorie.nbreProduit }}</td>
+              <td>
+                @if (categorie.parent) {
+                  <div>
+                    <a [routerLink]="['/categorie', categorie.parent.id, 'view']">{{ categorie.parent.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/categorie', categorie.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Voir</span>
+                  </a>
+
+                  <a [routerLink]="['/categorie', categorie.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editer</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(categorie)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Supprimer</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

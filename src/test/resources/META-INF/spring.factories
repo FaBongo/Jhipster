@@ -1,0 +1,2 @@
+org.springframework.test.context.ContextCustomizerFactory = www.diti5.\
+    springboot1.config.SqlTestContainersSpringContextCustomizerFactory

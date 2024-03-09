@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20240309133642"
+  },
+  "applications": "*",
+  "entityTableName": "categorie",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "depth",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "nbreProduit",
+      "fieldType": "Long"
+    }
+  ],
+  "name": "Categorie",
+  "relationships": [
+    {
+      "otherEntityName": "categorie",
+      "relationshipName": "parent",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

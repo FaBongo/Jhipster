@@ -1,0 +1,7 @@
+# This configuration is intended for development purpose, it's **your** responsibility to harden it for production
+name: jhipstermicroservices
+services:
+  mssql:
+    extends:
+      file: ./mssql.yml
+      service: mssql

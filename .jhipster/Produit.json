@@ -1,0 +1,33 @@
+{
+  "annotations": {
+    "changelogDate": "20240309133742"
+  },
+  "applications": "*",
+  "entityTableName": "produit",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "prix",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Produit",
+  "relationships": [
+    {
+      "otherEntityName": "categorie",
+      "relationshipName": "categorie",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}
